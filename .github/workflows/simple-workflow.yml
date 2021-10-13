@@ -35,7 +35,6 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
       - name: Replacing
-        id: environment
         run: |
           echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | sed 's/-/_/g')" >> $GITHUB_ENV
-          echo "${{ env.BRANCH_NAME }}"
+      - run: echo "${{ env.BRANCH_NAME }}"
