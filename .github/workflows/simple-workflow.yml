@@ -38,7 +38,7 @@ jobs:
         uses: mad9000/actions-find-and-replace-string@1
         id: findandreplace
         with:
-          source: ${{ github.ref }}
+          source: ${{ GITHUB_REF#refs/heads/}}
           find: "-_"
           replace: ""
       - name: Get the above output
