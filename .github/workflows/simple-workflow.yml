@@ -34,3 +34,16 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      - name: Replacing
+      - run: |
+
+        ref="${github_ref////-}"
+
+        echo $ref
+
+        echo "::set-env name=ref::$ref"
+
+      env:
+
+        github_ref: ${{ github.ref }}
+      
