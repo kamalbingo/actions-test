@@ -35,11 +35,7 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
       - name: Replacing
-        uses: mad9000/actions-find-and-replace-string@1
-        id: findandreplace
-        with:
-          source: ${{ GITHUB_REF#refs/heads/}}
-          find: "-_"
-          replace: ""
-      - name: Get the above output
-        run: echo "The replaced value is ${{ steps.findandreplace.outputs.value }}"
+        id: environment
+        run: |
+          echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | sed 's/-/_/g')" >> $GITHUB_ENV
+          echo "${{ env.BRANCH_NAME }}"
