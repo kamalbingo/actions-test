@@ -36,11 +36,12 @@ jobs:
           echo test, and deploy your project.
       - name: Set branch name env var
         run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
+
       - id: environment
         uses: ASzc/change-string-case-action@v1
         with:
           string: ${{ endsWith(env.BRANCH_NAME, 'master') && 'development' || env.BRANCH_NAME }}
       - name: Replace dash with underscore
         run: |
-          echo "UNDERSCORE_BRANCH_NAME=$(echo ${steps.environment.outputs.uppercase} | sed 's/-/_/g')" >> $GITHUB_ENV
+          echo "UNDERSCORE_BRANCH_NAME=$(echo ${{steps.environment.outputs.uppercase}} | sed 's/-/_/g')" >> $GITHUB_ENV
       - run: echo "${{ env.UNDERSCORE_BRANCH_NAME }}"
