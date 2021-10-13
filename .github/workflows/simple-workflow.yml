@@ -35,10 +35,14 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
       - name: Replacing
-      - run: |
-          ref="${github.ref////-}"
-          echo $ref
-          echo "::set-env name=ref::$ref"                    
+        uses: mad9000/actions-find-and-replace-string@1
+        id: findandreplace
+        with:
+          source: ${{ github.ref }}
+          find: '-_'
+          replace: ''
+      - name: Get the above output
+        run: echo "The replaced value is ${{ steps.findandreplace.outputs.value }}"                   
       env:
         github_ref: ${{ github.ref }}
       
